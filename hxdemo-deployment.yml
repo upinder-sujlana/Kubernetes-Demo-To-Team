@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hxdemo
+  labels:
+    app: hxdemo
+    snack: pizza
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hxdemo
+      snack: pizza
+  template:
+    metadata:
+      labels:
+        app: hxdemo
+        snack: pizza
+    spec:
+      containers:
+        - name: container-one
+          image: upigrad82/hxdemo:v1
+          ports:
+            - containerPort: 5000
+          env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.name
+          - name: POD_PODIP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service  
+metadata:
+  name: hxdemo-svc  
+  labels:
+    app: hxdemo
+    snack: pizza
+spec:
+  type: NodePort
+  ports:
+  - port: 8050
+    targetPort: 5000
+    nodePort: 30500 
+    protocol: TCP
+  selector:
+    app: hxdemo
+    snack: pizza
